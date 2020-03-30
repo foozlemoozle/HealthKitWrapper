@@ -1,21 +1,24 @@
 ﻿<Properties StartupConfiguration="{D89B0DD2-5033-9B3F-A17E-4A503C60D504}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/build/iOSBuilder.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/package.json">
     <Files>
-      <File FileName="Assets/Plugins/HealthKitWrapper.cs" Line="25" Column="53" />
-      <File FileName="Assets/Scripts/TestPlugin.cs" Line="13" Column="30" />
-      <File FileName="Assets/Plugins/build/iOSBuilder.cs" Line="20" Column="88" />
+      <File FileName="Assets/package.json" Line="6" Column="20" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="HealthKitWrapper" expanded="True" selected="True" />
+          <Node name="HealthKitWrapper" expanded="True">
+            <Node name="Assets" expanded="True" selected="True" />
+          </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f8e8d63d-bf5e-4256-b5c5-d7be6bddf476" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d836a2cb-07bb-46d0-af60-39ee96d97749" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

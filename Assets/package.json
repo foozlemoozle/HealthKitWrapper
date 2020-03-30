@@ -1,0 +1,7 @@
+{
+	"name": "com.keg.healthkitwrapper",
+	"version": "0.1.0",
+	"displayName": "HealthKit Wrapper",
+	"description": "iOS Native Plugin to handle interactions with HealthKit.",
+	"unity": "2019.2",
+}
