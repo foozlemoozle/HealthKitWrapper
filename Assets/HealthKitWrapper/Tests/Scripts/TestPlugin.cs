@@ -2,22 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using com.keg.healthkitwrapper;
 
-public class TestPlugin : MonoBehaviour
+namespace com.keg.healthkitwrapper.tests
 {
-    public TextMeshProUGUI text;
-
-    // Start is called before the first frame update
-    void Start()
+    public class TestPlugin : MonoBehaviour
     {
-        HealthKitWrapper.GetDistance( OnGetDistance );
-    }
+        public TextMeshProUGUI text;
 
-    private void OnGetDistance( double distance )
-    {
-        if( text != null )
+        // Start is called before the first frame update
+        void Start()
         {
-            text.text = "Distance: " + distance.ToString();
+            HealthKitWrapper.GetDistance( OnGetDistance );
+        }
+
+        private void OnGetDistance( double distance )
+        {
+            if( text != null )
+            {
+                text.text = "Distance: " + distance.ToString();
+            }
         }
     }
 }

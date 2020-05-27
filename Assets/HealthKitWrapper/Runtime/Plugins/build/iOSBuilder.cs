@@ -6,67 +6,70 @@ using System.Collections;
 using UnityEditor.iOS.Xcode;
 using System.IO;
 
-public static class iOSBuilder
+namespace com.keg.healthkitwrapper
 {
-    private static string ENTITLEMENTS_PATH = Application.dataPath + "/Plugins/build/entitlements/";
-
-    [PostProcessBuild]
-    public static void AddEntitlements( BuildTarget buildTarget, string pathToBuiltProject )
+    public static class iOSBuilder
     {
-        if( buildTarget == BuildTarget.iOS )
+        private static string ENTITLEMENTS_PATH = Application.dataPath + "/Plugins/build/entitlements/";
+
+        [PostProcessBuild]
+        public static void AddEntitlements( BuildTarget buildTarget, string pathToBuiltProject )
         {
-            PBXProject pbxProj = new PBXProject();
-
-            string pbxProjPath = PBXProject.GetPBXProjectPath( pathToBuiltProject ); //pathToBuiltProject + "/Unity-iPhone.xcodeproj/project.pbxproj";
-
-            pbxProj.ReadFromFile( pbxProjPath );
-            string target = pbxProj.TargetGuidByName( "Unity-iPhone" );
-
-            string[] entitlements = Directory.GetFiles( ENTITLEMENTS_PATH );
-
-            int count = entitlements.Length;
-            for( int i = 0; i < count; ++i )
+            if( buildTarget == BuildTarget.iOS )
             {
-                if( entitlements[ i ].EndsWith( ".meta" ) )
-                {
-                    //don't do the .meta file
-                    continue;
-                }
+                PBXProject pbxProj = new PBXProject();
 
-                Debug.LogFormat( "Adding entitlement {0} to xcode project.", entitlements[ i ] );
-                pbxProj.AddCapability( target, PBXCapabilityType.HealthKit, entitlements[ i ], true );
+                string pbxProjPath = PBXProject.GetPBXProjectPath( pathToBuiltProject ); //pathToBuiltProject + "/Unity-iPhone.xcodeproj/project.pbxproj";
+
+                pbxProj.ReadFromFile( pbxProjPath );
+                string target = pbxProj.TargetGuidByName( "Unity-iPhone" );
+
+                string[] entitlements = Directory.GetFiles( ENTITLEMENTS_PATH );
+
+                int count = entitlements.Length;
+                for( int i = 0; i < count; ++i )
+                {
+                    if( entitlements[ i ].EndsWith( ".meta" ) )
+                    {
+                        //don't do the .meta file
+                        continue;
+                    }
+
+                    Debug.LogFormat( "Adding entitlement {0} to xcode project.", entitlements[ i ] );
+                    pbxProj.AddCapability( target, PBXCapabilityType.HealthKit, entitlements[ i ], true );
+                }
             }
         }
-    }
 
-    [PostProcessBuild]
-    public static void ChangeXcodePlist( BuildTarget buildTarget, string pathToBuiltProject )
-    {
-
-        if( buildTarget == BuildTarget.iOS )
+        [PostProcessBuild]
+        public static void ChangeXcodePlist( BuildTarget buildTarget, string pathToBuiltProject )
         {
 
-            // Get plist
-            string plistPath = pathToBuiltProject + "/Info.plist";
-            PlistDocument plist = new PlistDocument();
-            plist.ReadFromString( File.ReadAllText( plistPath ) );
+            if( buildTarget == BuildTarget.iOS )
+            {
 
-            // Get root
-            PlistElementDict rootDict = plist.root;
+                // Get plist
+                string plistPath = pathToBuiltProject + "/Info.plist";
+                PlistDocument plist = new PlistDocument();
+                plist.ReadFromString( File.ReadAllText( plistPath ) );
 
-            AddHealthKitAuthDescription( rootDict );
+                // Get root
+                PlistElementDict rootDict = plist.root;
 
-            // Write to file
-            File.WriteAllText( plistPath, plist.WriteToString() );
+                AddHealthKitAuthDescription( rootDict );
+
+                // Write to file
+                File.WriteAllText( plistPath, plist.WriteToString() );
+            }
+        }
+
+        private static void AddHealthKitAuthDescription( PlistElementDict rootDict )
+        {
+            string key = "NSHealthShareUsageDescription";//"Privacy - Health Share Usage Description";
+                                                         //change this to whatever you want
+            string value = "This app uses exercise information to function.  Please authorize all of the above.";
+            rootDict.SetString( key, value );
         }
     }
-
-    private static void AddHealthKitAuthDescription( PlistElementDict rootDict )
-    {
-        string key = "NSHealthShareUsageDescription";//"Privacy - Health Share Usage Description";
-        //change this to whatever you want
-        string value = "This app uses exercise information to function.  Please authorize all of the above.";
-        rootDict.SetString( key, value );
-    }
-}
 #endif
+}
