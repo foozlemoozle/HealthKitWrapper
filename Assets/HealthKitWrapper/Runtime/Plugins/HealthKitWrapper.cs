@@ -1,4 +1,9 @@
-﻿using System.Runtime.InteropServices;
+﻿/// Created by: Kirk George
+/// Copyright: Kirk George
+/// Website: https://github.com/foozlemoozle?tab=repositories
+/// See upload date for date created.
+
+using System.Runtime.InteropServices;
 using UnityEngine;
 using AOT;
 

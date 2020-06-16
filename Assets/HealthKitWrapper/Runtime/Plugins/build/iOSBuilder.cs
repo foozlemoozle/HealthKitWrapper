@@ -1,4 +1,10 @@
-﻿#if UNITY_EDITOR
+﻿/// Created by: Kirk George
+/// Copyright: Kirk George
+/// Website: https://github.com/foozlemoozle?tab=repositories
+/// See upload date for date created.
+
+
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
