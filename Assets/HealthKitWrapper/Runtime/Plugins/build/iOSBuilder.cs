@@ -16,7 +16,7 @@ namespace com.keg.healthkitwrapper
 {
     public static class iOSBuilder
     {
-        private static string ENTITLEMENTS_PATH = Application.dataPath + "/Plugins/build/entitlements/";
+        private static string ENTITLEMENTS_PATH = Application.dataPath + "/HealthKitWrapper/Runtime/Plugins/build/entitlements/";
 
         [PostProcessBuild]
         public static void AddEntitlements( BuildTarget buildTarget, string pathToBuiltProject )
@@ -77,5 +77,5 @@ namespace com.keg.healthkitwrapper
             rootDict.SetString( key, value );
         }
     }
-#endif
 }
+#endif

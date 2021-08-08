@@ -18,7 +18,7 @@ namespace com.keg.healthkitwrapper.tests
         // Start is called before the first frame update
         void Start()
         {
-            HealthKitWrapper.GetDistance( OnGetDistance );
+            HealthKitWrapper.GetDistance( 0, OnGetDistance );
         }
 
         private void OnGetDistance( double distance )

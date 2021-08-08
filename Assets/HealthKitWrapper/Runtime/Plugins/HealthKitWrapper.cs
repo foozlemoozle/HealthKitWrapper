@@ -15,7 +15,7 @@ namespace com.keg.healthkitwrapper
 
         private delegate void OnGetDistance( double distance );
 
-        public static void GetDistance( System.Action<double> onGetData )
+        public static void GetDistance( long lastCheckedUnix, System.Action<double> onGetData )
         {
             OnGetDistanceInternal += onGetData;
 
@@ -23,7 +23,7 @@ namespace com.keg.healthkitwrapper
             OnGetDistanceDelegateWrapper( 1 );
 #elif UNITY_IOS
         Debug.Log( "callback received" );
-        GetDistanceWrapper( OnGetDistanceDelegateWrapper );
+        GetDistanceWrapper( (double)lastCheckedUnix, OnGetDistanceDelegateWrapper );
 #else
         onGetDistance( 1 );
 #endif
@@ -38,7 +38,7 @@ namespace com.keg.healthkitwrapper
 
 #if UNITY_IOS
         [DllImport( "__Internal" )]
-        private static extern void GetDistanceWrapper( OnGetDistance onGetDistance );
+        private static extern void GetDistanceWrapper( double lastCheckedUnix, OnGetDistance onGetDistance );
 #endif
     }
 }
